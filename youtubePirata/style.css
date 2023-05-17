@@ -80,28 +80,57 @@ main{
 .video-youtube{
     display: flex;
     flex-direction: column;
-    gap: 5rem;
+    gap: 1rem;
 }
 
 .video-youtube h2{
     color: white;
-    text-align: center;
+}
+/* Contenedor likes */
+.calificacion{
+    margin-top: 2rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+ 
+    font-size: 30px;
+}
+.likes{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+.views{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+.calificacion p{
+    font-size: 30px;
+    color: white;
+    
+}
+.calificacion img{
+    width: 2rem;
 }
 
+
+
 /* FALTA LA SECCION DE VIDEOS RELACIONADOS */
+.videos-recomendados{
+    margin-top: 2rem;
+}
 
 
 
 
 /* COMENTARIOS */
 .seccion-comentarios{
-    padding: 0 2rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     width: 50rem;
 }
-
 
 /* HEADER COMENTARIOS */
 
@@ -140,7 +169,6 @@ main{
 .caja-comentarios::-webkit-scrollbar-thumb{
     background-color: #AD2727;
 }
-
 
 .comentario h3{
     color: #AD2727;
