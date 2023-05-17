@@ -5,8 +5,9 @@ let contenedorVideo = document.querySelector("#iframe");
 let creador = document.querySelector('#creador')
 let logoCreador = document.querySelector('#logo-creador')
 //comentarios
-let nombreComentario = document.querySelectorAll('.comentario h3')
-let comentario = document.querySelectorAll('.comentario p')
+let contenedorComentarios = document.querySelector('#caja-comentarios')
+// let nombreComentario = document.querySelectorAll('.comentario h3')
+// let comentario = document.querySelectorAll('.comentario p')
 
 
 //  son las opciones que se usa para consumir los datos que trae la API
@@ -48,11 +49,16 @@ const getComments = async(id)=>{
     options.method = "GET";     
     let comments = await ( await fetch(`https://youtube138.p.rapidapi.com/video/comments/?id=${id}&hl=en&gl=US`,options)).json();
 
-    for(let i=0;i<3;i++){
-        nombreComentario[i].innerHTML = comments.comments[i].author.title
-        comentario[i].innerHTML = comments.comments[i].content
-    }
+    for(let i=0;i<comments.comments.length;i++){
 
+        contenedorComentarios.innerHTML += `
+        <div class="comentario">
+            <h3>${comments.comments[i].author.title}</h3>
+            <p>${comments.comments[i].content}</p>
+        </div>
+        `
+    }
+    
 }
 
 
