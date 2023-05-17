@@ -7,9 +7,10 @@ let logoCreador = document.querySelector('#logo-creador')
 let titulo = document.querySelector('#video h2')
 //comentarios
 let contenedorComentarios = document.querySelector('#caja-comentarios')
+let nComentarios= document.querySelector('#header-comentarios') //revisar
 //Descriptions
-let likes = document.querySelector('#likes')
-let views = document.querySelector('#views')
+let likes = document.querySelector('#likes p')
+let views = document.querySelector('#views p')
 
 
 
@@ -72,7 +73,10 @@ const url = 'https://youtube138.p.rapidapi.com/video/details/?id=kJQP7kiw5Fk&hl=
 const getDescription = async(id)=>{
     options.method = "GET";
     let description = await ( await fetch(`https://youtube138.p.rapidapi.com/video/details/?id=${id}&hl=en&gl=US`,options)).json();
-    
+    likes.innerHTML = description.stats.likes
+    views.innerHTML = description.stats.views
+    nComentarios.innerHTML = `<h4>Número de comentarios: ${description.stats.comments}</h4> ` //revisar
+
 }
 
 

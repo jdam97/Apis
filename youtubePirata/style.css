@@ -110,6 +110,10 @@ main{
     color: white;
     
 }
+.calificacion h3{
+    font-weight: bold;
+    color: white;
+}
 .calificacion img{
     width: 2rem;
 }
@@ -130,6 +134,11 @@ main{
     flex-direction: column;
     gap: 2rem;
     width: 50rem;
+}
+.seccion-comentarios h4{
+    margin-left: 15rem;
+    font-weight: bold;
+    font-size: 30px;
 }
 
 /* HEADER COMENTARIOS */
