@@ -110,12 +110,15 @@ main{
     color: white;
     align-items: center;
     gap: 2rem;
+    padding: .5rem;
+    border-bottom: 3px solid white;
 }
 .header-comentarios h2{
     font-size: 40px;
-    color: #AD2727;
+    color: white;
 }
 .header-comentarios img{
+    border-radius: 10rem;
     width: 4rem;
 }
 
@@ -124,6 +127,8 @@ main{
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    overflow-y: auto;  /* con esto hago el scroll en el eje y */
+     height: 35rem; /* debo darle una altura definida */
 }
 
 .comentario h3{

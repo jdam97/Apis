@@ -4,6 +4,10 @@ const inputBuscar = document.querySelector('#buscarVideo')
 let contenedorVideo = document.querySelector("#iframe");
 let creador = document.querySelector('#creador')
 let logoCreador = document.querySelector('#logo-creador')
+//comentarios
+let nombreComentario = document.querySelectorAll('.comentario h3')
+let comentario = document.querySelectorAll('.comentario p')
+
 
 //  son las opciones que se usa para consumir los datos que trae la API
 const options = {
@@ -18,6 +22,7 @@ const options = {
 buscar.addEventListener('click',(e)=>{
     e.preventDefault();
     getVideo(inputBuscar.value)
+    
 
 })
 
@@ -28,7 +33,26 @@ const getVideo = async(inputBuscar)=>{
     let video = await ( await fetch(`https://youtube138.p.rapidapi.com/search/?q=${inputBuscar}&hl=en&gl=US`,options)).json();
     //Video
     contenedorVideo.src = `https://www.youtube.com/embed/${video.contents[0].video.videoId}`
+    let id = video.contents[0].video.videoId
     //Especificaciones del canal
+    //Nombre
+    creador.innerHTML = video.contents[0].video.author.title
+    //Logo
+    logoCreador.src = video.contents[0].video.author.avatar[0].url
+    getComments(id)
+}
+
+const url = 'https://youtube138.p.rapidapi.com/video/comments/?id=kJQP7kiw5Fk&hl=en&gl=US';
+
+const getComments = async(id)=>{
+    options.method = "GET";     
+    let comments = await ( await fetch(`https://youtube138.p.rapidapi.com/video/comments/?id=${id}&hl=en&gl=US`,options)).json();
+
+    for(let i=0;i<3;i++){
+        nombreComentario[i].innerHTML = comments.comments[i].author.title
+        comentario[i].innerHTML = comments.comments[i].content
+    }
 
 }
+
 
