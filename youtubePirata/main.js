@@ -7,11 +7,15 @@ let logoCreador = document.querySelector('#logo-creador')
 let titulo = document.querySelector('#video h2')
 //comentarios
 let contenedorComentarios = document.querySelector('#caja-comentarios')
-let nComentarios= document.querySelector('#header-comentarios') //revisar
+let nComentarios= document.querySelector('#nComentarios') //revisar
 //Descriptions
 let likes = document.querySelector('#likes p')
 let views = document.querySelector('#views p')
-
+let fecha = document.querySelector('#fecha')
+let hashtags = document.querySelector('#hashtags')
+let descripcion = document.querySelector('#description-video')
+//Videos relacionados
+let videosRecomendados = document.querySelector('#lista-videos')
 
 
 
@@ -49,17 +53,19 @@ const getVideo = async(inputBuscar)=>{
     //título video
     titulo.innerHTML = video.contents[0].video.title
     getDescription(id)
+    //videos recomendados
+    getVideosRelacionados(id)
 }
 
 //funcion comentarios
 const getComments = async(id)=>{
     options.method = "GET";     
     let comments = await ( await fetch(`https://youtube138.p.rapidapi.com/video/comments/?id=${id}&hl=en&gl=US`,options)).json();
-
+    comments.innerHTML=``
     for(let i=0;i<comments.comments.length;i++){
 
         contenedorComentarios.innerHTML += `
-        <div class="comentario">
+        <div class=comentario>
             <h3>${comments.comments[i].author.title}</h3>
             <p>${comments.comments[i].content}</p>
         </div>
@@ -75,14 +81,26 @@ const getDescription = async(id)=>{
     let description = await ( await fetch(`https://youtube138.p.rapidapi.com/video/details/?id=${id}&hl=en&gl=US`,options)).json();
     likes.innerHTML = description.stats.likes
     views.innerHTML = description.stats.views
-    nComentarios.innerHTML = `<h4>Número de comentarios: ${description.stats.comments}</h4> ` //revisar
-
+    nComentarios.innerHTML = `Número de comentarios: ${description.stats.comments} `//revisar
+    fecha.innerHTML = description.publishedDate
+    descripcion.innerHTML = description.description
+    hashtags.innerHTML=``
+    for (let i=0; i<description.superTitle.items.length;i++){
+        hashtags.innerHTML += description.superTitle.items[i]
+    }
 }
-
-
-
-
-
+//Videos relacionados
+const getVideosRelacionados = async(id)=>{
+    options.method = "GET";
+    let videosRelacionados = await ( await fetch(`https://youtube138.p.rapidapi.com/video/related-contents/?id=${id}&hl=en&gl=US`,options)).json();
+    videosRecomendados.innerHTML = ``
+    for(let i=0; i<3;i++){
+        
+        videosRecomendados.innerHTML += `
+        <iframe width="430" height="245" src="https://www.youtube.com/embed/${videosRelacionados.contents[i].video.videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        `
+    }
+}
 
 
 
