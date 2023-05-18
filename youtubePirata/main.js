@@ -33,7 +33,6 @@ buscar.addEventListener('click',(e)=>{
     e.preventDefault();
     getVideo(inputBuscar.value)
     
-
 })
 
 //funcion para traerme los datos de la API
