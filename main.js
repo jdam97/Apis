@@ -54,13 +54,13 @@ const getVideo = async(inputBuscar)=>{
     getDescription(id)
     //videos recomendados
     getVideosRelacionados(id)
-}
+}   
 
 //funcion comentarios
 const getComments = async(id)=>{
     options.method = "GET";     
     let comments = await ( await fetch(`https://youtube138.p.rapidapi.com/video/comments/?id=${id}&hl=en&gl=US`,options)).json();
-    comments.innerHTML=``
+    contenedorComentarios.innerHTML=``
     for(let i=0;i<comments.comments.length;i++){
 
         contenedorComentarios.innerHTML += `
@@ -94,7 +94,6 @@ const getVideosRelacionados = async(id)=>{
     let videosRelacionados = await ( await fetch(`https://youtube138.p.rapidapi.com/video/related-contents/?id=${id}&hl=en&gl=US`,options)).json();
     videosRecomendados.innerHTML = ``
     for(let i=0; i<3;i++){
-        
         videosRecomendados.innerHTML += `
         <iframe width="430" height="245" src="https://www.youtube.com/embed/${videosRelacionados.contents[i].video.videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         `
